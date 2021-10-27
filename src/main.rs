@@ -110,7 +110,7 @@ fn main() {
             if (center_line) {
                 color = vec4(0.3, 0.0, 0.0, 1.0);
             } else {
-                color = vec4(1.0, 1.0, 1.0, 1.0);
+                color = vec4(1.0, 1.0, 1.0, 0.1);
             }
         }
     "#;
@@ -120,7 +120,7 @@ fn main() {
     *** Generate vertices ***
     */
     let padding = 0.1;
-    let n_segments = 150;
+    let n_segments = 500;
     let center_line_width = 5.0;
     let lines_width = 1.0;
     let mut center_line: Vec::<Vertex> = Vec::new();
@@ -179,6 +179,17 @@ fn main() {
     };
     let narrow_line_params = glium::DrawParameters {
         line_width: Some(lines_width),
+        blend: glium::Blend {
+            alpha: glium::BlendingFunction::Addition {
+                source: glium::LinearBlendingFactor::SourceAlpha,
+                destination: glium::LinearBlendingFactor::DestinationAlpha,
+            },
+            color: glium::BlendingFunction::Addition {
+                source: glium::LinearBlendingFactor::SourceAlpha,
+                destination: glium::LinearBlendingFactor::DestinationAlpha,
+            },
+            constant_value: (1.0, 1.0, 1.0, 1.0),
+        },
         .. Default::default()
     };
 
