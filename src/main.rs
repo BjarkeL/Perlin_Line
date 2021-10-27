@@ -76,7 +76,7 @@ fn main() {
 
         
         void main() {
-            float noise_factor = 0.5;
+            float noise_factor = 1.5; // Changes the frequency of the noise waves.
             vec2 pos = position;
             float y;
             
@@ -120,7 +120,7 @@ fn main() {
     *** Generate vertices ***
     */
     let padding = 0.1;
-    let n_segments = 100;
+    let n_segments = 150;
     let center_line_width = 5.0;
     let lines_width = 1.0;
     let mut center_line: Vec::<Vertex> = Vec::new();
@@ -205,7 +205,7 @@ fn main() {
         let next_frame_time = std::time::Instant::now() + std::time::Duration::from_nanos(16_666_667);
         *control_flow = glutin::event_loop::ControlFlow::WaitUntil(next_frame_time);
         
-        t += 0.01;
+        t += 0.005; // Changes the speed of the wave.
         
         let mut target = display.draw();
         target.clear_color(0.0, 0.0, 0.0, 1.0);
